@@ -5,7 +5,7 @@ import HomePage from './pages/HomePage/HomePage';
 
 function App() {
 
-  const [signedIn, setSignedIn] = useState(false);
+  const [signedIn, setSignedIn] = useState(true);
 
   return (
     <div className="App">

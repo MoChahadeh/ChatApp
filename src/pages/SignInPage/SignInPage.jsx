@@ -29,7 +29,7 @@ function SignInPage(props) {
                     <div className="overlay">
                         <div className="overlay-panel overlay-left">
                             <h1>Already Registered?</h1>
-                            <p>Sign In to user account from here</p>
+                            <p>Sign In to your account from here</p>
                             <button className="ghost" id="signIn" onClick={() => document.getElementById("container").classList.remove("right-panel-active")}>Sign In</button>
                         </div>
                         <div className="overlay-panel overlay-right">

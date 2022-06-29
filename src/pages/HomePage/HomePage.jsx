@@ -1,12 +1,17 @@
 import "./HomePage.css";
+import NavBar from "./components/NavBar";
 
+const usrObject = {
+    name: "John Doe",
+    email: "example@example.com",
+    admin: false
+}
 
 function HomePage(props) {
 
     return (
         <div id="homePage">
-            <h1>HOME PAGE</h1>
-            <button onClick={() => props.setSignedIn(false)}>Sign out</button>
+            <NavBar usr={usrObject} setSignedIn={props.setSignedIn}/>
         </div>
     );
 
