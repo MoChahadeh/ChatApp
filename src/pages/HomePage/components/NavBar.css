@@ -1,0 +1,94 @@
+
+#navBar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background-color: #fff;
+    z-index: 1;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0px 20px;
+    border-radius: 0px 0px 10px 10px;
+    background-image: linear-gradient(to right,rgb(32, 69, 155) 0%, rgba(0,212,255,1) 100%);
+}
+
+#navBar * {
+
+    user-select: none;
+
+}
+
+#navBar-left-title #navBar-title {
+    font-size: 1.5em;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+}
+
+#navBar-right {
+    position: relative;
+    color: white;
+    margin-left: auto;
+    font-size: 1.5em;
+}
+
+#navBar-right #user-popup {
+
+    background: white;
+    width: 150px;
+    height: auto;
+    padding-top: 20px;
+    position:absolute;
+    color: black;
+    top: 100%;
+    right: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+}
+
+#navBar-right #user-popup.hidden {
+    display: none;
+}
+
+#navBar-right #navBar-user-icon {
+	cursor: pointer;
+    transition: 0.1s ease-in-out;
+}
+#navBar-right #navBar-user-icon:active {
+	transform: scale(0.85);
+}
+
+#navBar #sign-out-btn {
+	border-radius: 20px;
+	border: 1px solid rgb(144, 17, 17);
+	background-color: rgba(0,0,0,0);
+	color: rgb(144, 17, 17);
+	font-size: 12px;
+	font-weight: bold;
+	padding: 12px 12px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+    cursor: pointer;
+    margin: 10px;
+    margin-top: 20px;
+}
+
+#navBar #sign-out-btn:active {
+	transform: scale(0.95);
+}
+
+#navBar #sign-out-btn:focus {
+	outline: none;
+}
+
+#navBar #sign-out-btn.ghost {
+	background-color: transparent;
+	border-color: #FFFFFF;
+}

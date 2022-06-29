@@ -218,7 +218,7 @@
     }
 
     #signInPage .overlay-left {
-        transform: translateX(-20%);
+        transform: translateX(-50%);
     }
     
     #signInPage .container.right-panel-active .overlay-left {
@@ -231,7 +231,7 @@
     }
     
     #signInPage .container.right-panel-active .overlay-right {
-        transform: translateX(20%);
+        transform: translateX(50%);
     }
 
 }

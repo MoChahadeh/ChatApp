@@ -1,3 +1,4 @@
+import "./NavBar.css";
 import fontawesome from '@fortawesome/fontawesome'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faUserTie } from '@fortawesome/fontawesome-free-solid'
@@ -16,12 +17,12 @@ function NavBar(props) {
 
             <div id="navBar-right">
                 <div id="navBar-right-user-icon">
-                    <FontAwesomeIcon onClick={togglePopUp} icon="fa-solid fa-user-tie" />
+                    <FontAwesomeIcon id="navBar-user-icon" onClick={togglePopUp} icon="fa-solid fa-user-tie" />
                     <div id="user-popup" className="hidden">
                         <div id="user-popup-name">{props.usr.name}</div>
-                        <a onClick={() => props.setSignedIn(false)} id="sign-out-btn">
+                        <button onClick={() => props.setSignedIn(false)} id="sign-out-btn">
                             Sign Out
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
