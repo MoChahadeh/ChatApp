@@ -5,7 +5,7 @@
 	box-sizing: border-box;
 }
 
-body {
+#signInPage {
 	background: #f6f5f7;
 	display: flex;
 	justify-content: center;
@@ -13,29 +13,21 @@ body {
 	flex-direction: column;
 	font-family: 'Montserrat', sans-serif;
 	height: 100vh;
-	margin: -20px 0 50px;
+	/* margin: -20px 0 50px; */
 }
 
-h1 {
+#signInPage h1 {
 	font-weight: bold;
 	margin: 0;
 }
 
-h2 {
+#signInPage h2 {
 	text-align: center;
 }
 
-#signInPage {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    /* background-image: linear-gradient(to top right, #f6d365 0%, #fda085 100%); */
-}
 
 
-p {
+#signInPage p {
 	font-size: 14px;
 	font-weight: 100;
 	line-height: 20px;
@@ -43,18 +35,18 @@ p {
 	margin: 20px 0 30px;
 }
 
-span {
+#signInPage span {
 	font-size: 12px;
 }
 
-a {
+#signInPage a {
 	color: #333;
 	font-size: 14px;
 	text-decoration: none;
 	margin: 15px 0;
 }
 
-button {
+#signInPage button {
 	border-radius: 20px;
 	border: 1px solid rgba(9,9,121,1);
 	background-color: rgba(9,9,121,1);
@@ -65,22 +57,23 @@ button {
 	letter-spacing: 1px;
 	text-transform: uppercase;
 	transition: transform 80ms ease-in;
+    margin-top:10px;
 }
 
-button:active {
+#signInPage button:active {
 	transform: scale(0.95);
 }
 
-button:focus {
+#signInPage button:focus {
 	outline: none;
 }
 
-button.ghost {
+#signInPage button.ghost {
 	background-color: transparent;
 	border-color: #FFFFFF;
 }
 
-form {
+#signInPage form {
 	background-color: #FFFFFF;
 	display: flex;
 	align-items: center;
@@ -91,15 +84,16 @@ form {
 	text-align: center;
 }
 
-input {
+#signInPage input {
 	background-color: #eee;
 	border: none;
 	padding: 12px 15px;
 	margin: 8px 0;
 	width: 100%;
+    border-radius: 20px;;
 }
 
-.container {
+#signInPage .container {
 	background-color: #fff;
 	border-radius: 10px;
   	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
@@ -109,7 +103,7 @@ input {
 	width: 768px;
 }
 
-.form-container {
+#signInPage .form-container {
 	position: absolute;
 	top: 0;
 	height: 100%;
@@ -134,7 +128,7 @@ input {
 
 
 
-.overlay {
+#signInPage .overlay {
 	background: rgb(2,0,36);
     background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(0,212,255,1) 100%);
     background: -webkit-linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(0,212,255,1) 100%);
@@ -153,7 +147,7 @@ input {
 
 
 
-.overlay-panel {
+#signInPage .overlay-panel {
 	position: absolute;
 	display: flex;
 	align-items: center;
@@ -172,12 +166,12 @@ input {
 
 @media screen and (orientation: landscape) {
     
-    .container {
+    #signInPage .container {
         width: 100vh;
 	    height: 70vh;
     }
 
-    .sign-in-container {
+    #signInPage .sign-in-container {
         left: 0;
         width: 50%;
         z-index: 2;
@@ -185,14 +179,14 @@ input {
     
     
     
-    .sign-up-container {
+    #signInPage .sign-up-container {
         left: 0;
         width: 50%;
         opacity: 0;
         z-index: 1;
     }
 
-    .overlay-container {
+    #signInPage .overlay-container {
         position: absolute;
         top: 0;
         left: 50%;
@@ -203,39 +197,39 @@ input {
         z-index: 100;
     }
 
-    .container.right-panel-active .overlay-container{
+    #signInPage .container.right-panel-active .overlay-container{
         transform: translateX(-100%);
     }
 
-    .container.right-panel-active .sign-in-container {
+    #signInPage .container.right-panel-active .sign-in-container {
         transform: translateX(100%);
     }
 
-    .container.right-panel-active .sign-up-container {
+    #signInPage .container.right-panel-active .sign-up-container {
         transform: translateX(100%);
         opacity: 1;
         z-index: 5;
         animation: show 0.6s;
     }
 
-    .container.right-panel-active .overlay {
+    #signInPage .container.right-panel-active .overlay {
         transform: translateX(50%);
     }
 
-    .overlay-left {
+    #signInPage .overlay-left {
         transform: translateX(-20%);
     }
     
-    .container.right-panel-active .overlay-left {
+    #signInPage .container.right-panel-active .overlay-left {
         transform: translateX(0);
     }
     
-    .overlay-right {
+    #signInPage .overlay-right {
         right: 0;
         transform: translateX(0);
     }
     
-    .container.right-panel-active .overlay-right {
+    #signInPage .container.right-panel-active .overlay-right {
         transform: translateX(20%);
     }
 
@@ -243,14 +237,14 @@ input {
 
 @media screen and (orientation: portrait) {
     
-    .container {
+    #signInPage .container {
 
         width: 90vw;
 	    min-height: 80vh;
 
     }
 
-    .sign-in-container {
+    #signInPage .sign-in-container {
         left: 0;
         top: 50%;
         width: 100%;
@@ -260,7 +254,7 @@ input {
     
     
     
-    .sign-up-container {
+    #signInPage .sign-up-container {
         left: 0;
         top: 50%;
         width: 100%;
@@ -269,7 +263,7 @@ input {
         z-index: 1;
     }
 
-    .overlay-container {
+    #signInPage .overlay-container {
         position: absolute;
         top: 0;
         left: 0;
@@ -280,32 +274,32 @@ input {
         z-index: 100;
     }
 
-    .container.right-panel-active .overlay-container{
+    #signInPage .container.right-panel-active .overlay-container{
         transform: translateY(100%);
     }
 
-    .container.right-panel-active .sign-in-container {
+    #signInPage .container.right-panel-active .sign-in-container {
         transform: translateY(-100%);
     }
 
-    .container.right-panel-active .sign-up-container {
+    #signInPage .container.right-panel-active .sign-up-container {
         transform: translateY(-100%);
         opacity: 1;
         z-index: 5;
         animation: show 0.6s;
     }
 
-    .container.right-panel-active .overlay {
+    #signInPage .container.right-panel-active .overlay {
         transform: translateY(0);
     }
 
-    .overlay-left {
+    #signInPage .overlay-left {
         right: 0;
-        transform: translateY(100%);
+        transform: translateY(150%);
 
     }
     
-    .container.right-panel-active .overlay-left {
+    #signInPage .container.right-panel-active .overlay-left {
         /* transform: translateY(0);
         color: green;
         z-index: 999; */
@@ -313,15 +307,15 @@ input {
         transform: translateY(0%);
     }
     
-    .overlay-right {
+    #signInPage .overlay-right {
         right: 0;
         transform: translateY(0%);
     }
     
-    .container.right-panel-active .overlay-right {
+    #signInPage .container.right-panel-active .overlay-right {
         /* transform: translateY(20%); */
         /* right: 100%; */
-        transform: translateY(-100%);
+        transform: translateY(-150%);
     }
 
 }

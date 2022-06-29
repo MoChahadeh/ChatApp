@@ -8,7 +8,7 @@ function SignInPage(props) {
         <div id="signInPage">
             <div className="container" id="container">
                 <div className="form-container sign-up-container">
-                    <form action="#">
+                    <form onSubmit={() => props.setSignedIn(true)}>
                         <h1>Create Account</h1>
                         <input type="text" placeholder="Name" />
                         <input type="email" placeholder="Email" />
@@ -17,7 +17,7 @@ function SignInPage(props) {
                     </form>
                 </div>
                 <div className="form-container sign-in-container">
-                    <form action="#">
+                    <form onSubmit={() => props.setSignedIn(true)}>
                         <h1>Sign in</h1>
                         <input type="email" placeholder="Email" />
                         <input type="password" placeholder="Password" />
