@@ -8,14 +8,47 @@
     width:400px;
     overflow-y: scroll;
     padding-top: 50px;
+    transform: translateY(-10px);
+    border-right: 1px  solid rgb(0,0,0, 0.1);
 }
 
-#searchBar {
+#contactsListContainer #topBar {
     position:sticky;
     left: 0;
     top: 0;
-    z-index: 999;
     color: black;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-image: linear-gradient(to bottom, rgb(177, 177, 177) 5%, rgba(0,0,0,0) 100%, rgba(0,0,0,0) 100%);
+    padding-top: 20px;
+}
+
+#contactsListContainer #topBar #searchInput {
+    
+    height: 30px;
+    border-radius: 20px;
+    border: none;
+    flex: 1;
+    text-align: left;
+    padding: 0px 20px;
+
+}
+
+#contactsListContainer #topBar #newEntryButton {
+    font-size: 30px;
+    color: #ffffff;
+    width: 50px;
+    height: 40px;
+    background: none;
+    border: none;
+    padding: 0;
+    transition: all 0.1s ease-in-out;
+}
+
+#contactsListContainer #topBar #newEntryButton:active {
+    transform: scale(0.95);
 }
 
 #list {
@@ -33,5 +66,6 @@
 @media screen and (max-width: 600px) {
     #contactsListContainer {
         width: 100vw;
+        border: none;
     }
 }
