@@ -1,12 +1,43 @@
 import "./ChatView.css";
+import fontawesome from "@fortawesome/fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 
+fontawesome.library.add(faXmark);
+fontawesome.library.add(faPaperPlane);
 
 function ChatView(props) {
 
-    return (
-        <div id="chatView">
+    const closeChatView = () => {
 
-            <p>ChatView</p>
+        props.setSelectedContact(-1);
+        document.getElementById("chatView").classList.add("hidden");
+
+    }
+
+    const [message, setMessage] = useState("");
+
+    return (
+        <div id="chatView" className="hidden">
+
+            {props.selectedContact != -1 && <div id="chatViewContent">
+                <div id="chatViewTopBar">
+                    <h3>{props.usr.contactsList[props.selectedContact].name}</h3>
+
+                    <div onClick={closeChatView} id="chatViewTopBar-Right">
+                        <FontAwesomeIcon id="chatViewTopBar-Right-X" icon="fa-solid fa-xmark" onClick={props.closeChatView} />
+                    </div>
+
+                </div>
+
+                <div id="chatViewBottomBar">
+                    <input value={message} onChange={(ev) => setMessage(ev.target.value)} type="text" id="messageInput" placeholder="Message" />
+                    <div id="chatViewBottomBar-Buttons">
+                        <FontAwesomeIcon onClick={() => setMessage("")} id="sendButton" icon="fa-solid fa-paper-plane" />
+                    </div>
+                </div>
+            </div> }
 
         </div>
     );
