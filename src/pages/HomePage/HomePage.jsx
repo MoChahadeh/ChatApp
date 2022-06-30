@@ -1,5 +1,6 @@
 import "./HomePage.css";
-import NavBar from "./components/NavBar";
+import NavBar from "./components/NavBar/NavBar.jsx";
+import ContactsList from "./components/ContactsList/ContactsList.jsx";
 
 const usrObject = {
     name: "John Doe",
@@ -12,6 +13,7 @@ function HomePage(props) {
     return (
         <div id="homePage">
             <NavBar usr={usrObject} setSignedIn={props.setSignedIn}/>
+            <ContactsList />
         </div>
     );
 
