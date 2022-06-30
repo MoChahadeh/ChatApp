@@ -13,7 +13,7 @@
     justify-content: flex-start;
     padding: 0px 20px;
     border-radius: 0px 0px 10px 10px;
-    background-image: linear-gradient(to right,rgb(32, 69, 155) 0%, rgba(0,212,255,1) 100%);
+    background: rgba(9,121,12,1)
 }
 
 #navBar * {
