@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import fontawesome from "@fortawesome/fontawesome";
 import { faPenSquare } from "@fortawesome/fontawesome-free-solid";
 
+import {useState} from 'react'
+
 fontawesome.library.add(faPenSquare);
 
 const myContactsList = [
@@ -15,9 +17,57 @@ const myContactsList = [
 	{
 		name: "John Appleseed",
 	},
+	{
+		name: "Mohamad Chahadeh",
+	},
+	{
+		name: "John Dowe",
+	},
+	{
+		name: "John Appleseed",
+	},
+	{
+		name: "Mohamad Chahadeh",
+	},
+	{
+		name: "John Dowe",
+	},
+	{
+		name: "John Appleseed",
+	},
+	{
+		name: "Mohamad Chahadeh",
+	},
+	{
+		name: "John Dowe",
+	},
+	{
+		name: "John Appleseed",
+	},
+	{
+		name: "Mohamad Chahadeh",
+	},
+	{
+		name: "John Dowe",
+	},
+	{
+		name: "John Appleseed",
+	},
+	{
+		name: "Mohamad Chahadeh",
+	},
+	{
+		name: "John Dowe",
+	},
+	{
+		name: "John Appleseed",
+	},
 ];
 
 function ContactsList(props) {
+
+    const [selected, setSelected] = useState(-1);
+
 	return (
 		<div id="contactsListContainer">
 			<div id="topBar">
@@ -29,7 +79,7 @@ function ContactsList(props) {
 
 			<div id="list">
 				{myContactsList.map((contact, index) => (
-					<div key={index} className="contact">
+					<div key={index} onClick={() => setSelected(index)} className={"contact " + (selected == index ? "contactSelected " : null)}>
 						<div className="innerContainer">
                             <div className="contactProfilePic" />
                             <div className="infoColumn">

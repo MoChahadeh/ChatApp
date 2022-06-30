@@ -61,7 +61,13 @@
     border-bottom: 1px solid rgba(0,0,0,0.1);
     display: flex;
     flex-direction: column;
+    cursor: pointer;
 
+}
+
+#contactsListContainer #list .contact.contactSelected {
+    background-color: rgba(9,121,12,1);
+    color: white;
 }
 
 #contactsListContainer #list .contact .innerContainer {
@@ -91,7 +97,6 @@
     font-size: 1.2em;
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
-    color: black;
     margin-bottom: 10px;
     text-align: left;
 
@@ -110,7 +115,7 @@
 
 
 #list {
-    height: 1000px;
+    padding-bottom: 100px;
 }
 
 @media screen and (max-width: 800px) {
