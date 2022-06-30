@@ -7,66 +7,12 @@ import {useState} from 'react'
 
 fontawesome.library.add(faPenSquare);
 
-const myContactsList = [
-	{
-		name: "Mohamad Chahadeh",
-	},
-	{
-		name: "John Dowe",
-	},
-	{
-		name: "John Appleseed",
-	},
-	{
-		name: "Mohamad Chahadeh",
-	},
-	{
-		name: "John Dowe",
-	},
-	{
-		name: "John Appleseed",
-	},
-	{
-		name: "Mohamad Chahadeh",
-	},
-	{
-		name: "John Dowe",
-	},
-	{
-		name: "John Appleseed",
-	},
-	{
-		name: "Mohamad Chahadeh",
-	},
-	{
-		name: "John Dowe",
-	},
-	{
-		name: "John Appleseed",
-	},
-	{
-		name: "Mohamad Chahadeh",
-	},
-	{
-		name: "John Dowe",
-	},
-	{
-		name: "John Appleseed",
-	},
-	{
-		name: "Mohamad Chahadeh",
-	},
-	{
-		name: "John Dowe",
-	},
-	{
-		name: "John Appleseed",
-	},
-];
-
 function ContactsList(props) {
 
-    const [selected, setSelected] = useState(-1);
+	const showChatOf = (index) => {
+		props.setSelectedContact(index);
+		document.getElementById("chatView").classList.remove("hidden");
+	}
 
 	return (
 		<div id="contactsListContainer">
@@ -78,8 +24,8 @@ function ContactsList(props) {
 			</div>
 
 			<div id="list">
-				{myContactsList.map((contact, index) => (
-					<div key={index} onClick={() => setSelected(index)} className={"contact " + (selected == index ? "contactSelected " : null)}>
+				{props.usr.contactsList.map((contact, index) => (
+					<div key={index} onClick={() => showChatOf(index)} className={"contact " + (props.selectedContact == index ? "contactSelected " : null)}>
 						<div className="innerContainer">
                             <div className="contactProfilePic" />
                             <div className="infoColumn">
