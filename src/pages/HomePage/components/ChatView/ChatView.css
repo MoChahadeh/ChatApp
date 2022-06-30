@@ -1,0 +1,32 @@
+
+#chatView {
+
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: calc(100% - 402px);
+    height: 100%;
+    overflow-y: scroll;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid red;
+}
+
+@media screen and (max-width: 800px) {
+
+    #chatView {
+        width: calc(60% - 2px);
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+    #chatView {
+
+        display: none;
+
+    }
+}
