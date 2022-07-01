@@ -1,26 +1,33 @@
+import { useState } from "react";
 import "./SignInPage.css";
 // import "./styleAnimations.js";
-
+  
 
 function SignInPage(props) {
+
+    const [signInEmail, setSignInEmail] = useState("");
+    const [signInPass, setSignInPass] = useState("");
+    const [signUpName, setSignUpName] = useState("");
+    const [signUpEmail, setSignUpEmail] = useState("");
+    const [signUpPass, setSignUpPass] = useState("");
     
     return (
         <div id="signInPage">
             <div className="container" id="container">
                 <div className="form-container sign-up-container">
-                    <form onSubmit={() => props.setSignedIn(true)}>
+                    <form onSubmit={async () => await props.signIn(true, {email: signUpEmail, name:signUpName, password: signUpPass})}>
                         <h1>Create Account</h1>
-                        <input type="text" placeholder="Name" />
-                        <input type="email" placeholder="Email" />
-                        <input type="password" placeholder="Password" />
-                        <button>Sign Up</button>
+                        <input required value={signUpName} onChange={(e) => setSignUpName(e.target.value)} type="text" placeholder="Name" />
+                        <input required value={signUpEmail} onChange={(e) => setSignUpEmail(e.target.value)}  type="email" placeholder="Email" />
+                        <input required value={signUpPass} onChange={(e) => setSignUpPass(e.target.value)}   type="password" placeholder="Password" />
+                        <button >Sign Up</button>
                     </form>
                 </div>
                 <div className="form-container sign-in-container">
-                    <form onSubmit={() => props.setSignedIn(true)}>
+                    <form  onSubmit={async () => await props.signIn(false, {email: signInEmail, password: signInPass})}>
                         <h1>Sign in</h1>
-                        <input type="email" placeholder="Email" />
-                        <input type="password" placeholder="Password" />
+                        <input required value={signInEmail} onChange={(e) => setSignInEmail(e.target.value)} type="email" placeholder="Email" />
+                        <input required value={signInPass} onChange={(e) => setSignInPass(e.target.value)}  type="password" placeholder="Password" />
                         <a href="#">Forgot your password?</a>
                         <button>Sign In</button>
                     </form>
