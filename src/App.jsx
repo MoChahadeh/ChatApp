@@ -5,41 +5,51 @@ import HomePage from "./pages/HomePage/HomePage";
 import { getSuggestedQuery } from "@testing-library/react";
 
 function App() {
-	const [signedIn, setSignedIn] = useState(false);
 
+	const [signedIn, setSignedIn] = useState(false);
 	const [token, setToken] = useState("");
+	const [signInServerMessage, setSignInServerMessage] = useState("");
+	const [signUpServerMessage, setSignUpServerMessage] = useState("");
 
 	async function signIn(signUp, obj) {
-
 		const route = signUp ? "/users/signup" : "/auth";
 
 		try {
 			const res = await fetch("http://localhost:3011/api" + route, {
 				method: "POST",
-        mode: "cors",
+				mode: "cors",
 				headers: {
 					"Content-Type": "application/json",
 				},
 				body: JSON.stringify(obj),
 			});
 
-      const data = await res.json();
-      
-      if(data.token) {
-        console.log(data.token);
-        setToken(data.token);
-        setSignedIn(true);
-      }
-      else {
-        new Error("No token provided");
-      }
+			if (res.status == 200) {
+				const data = await res.json();
 
+				if (data.token) {
+					console.log(data.token);
+					setToken(data.token);
+					setSignInServerMessage("");
+					setSignUpServerMessage("");
+					setSignedIn(true);
+				} else {
+					throw new Error("No token provided");
+				}
+			} else {
+
+				const err = await res.text();
+				if(signUp) {
+					setSignUpServerMessage(err);
+				} else {
+					setSignInServerMessage(err);
+				}
+				throw new Error(err);
+			}
 		} catch (err) {
-      console.error(err);
-			alert(err.message);
+			console.error(err);
 		}
 	}
-
 
 	const signOut = () => {
 		console.log("Logged Out");
@@ -49,8 +59,16 @@ function App() {
 
 	return (
 		<div className="App">
-			{signedIn && <HomePage usrObject={async () => {return await fetchUser()}} signOut={signOut} token={token} />}
-			{!signedIn && <SignInPage signIn={signIn} />}
+			{signedIn && (
+				<HomePage
+					usrObject={async () => {
+						return await fetchUser();
+					}}
+					signOut={signOut}
+					token={token}
+				/>
+			)}
+			{!signedIn && <SignInPage signInServerMessage={signInServerMessage} signUpServerMessage={signUpServerMessage} signIn={signIn} />}
 		</div>
 	);
 }

@@ -27,12 +27,20 @@
 
 
 
-#signInPage p {
+#signInPage p:not(.serverMessage) {
 	font-size: 14px;
 	font-weight: 100;
 	line-height: 20px;
 	letter-spacing: 0.5px;
 	margin: 20px 0 30px;
+}
+
+.form-container .serverMessage {
+    color: #ff0000;
+    font-size: 14px;
+    font-weight: 100;
+    letter-spacing: 0.5px;
+    margin: 10px;
 }
 
 #signInPage span {
