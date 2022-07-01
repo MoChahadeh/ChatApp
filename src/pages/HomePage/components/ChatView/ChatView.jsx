@@ -7,12 +7,54 @@ import { useState } from "react";
 fontawesome.library.add(faXmark);
 fontawesome.library.add(faPaperPlane);
 
+
+const messages = [
+    {
+        received: true,
+        message: "Hi!",
+        date: new Date(),
+    },
+    {
+        received: false,
+        message: "Hey! How Are You?",
+        date: new Date(),
+    },
+    {
+        received: true,
+        message: "I'm Fine thanks for asking, I was checking your work on the project and I have noticed point A and B and C aren't working. Can you please fix them?",
+        date: new Date(),
+    },
+    {
+        received: false,
+        message: "I'm sorry, I'm just a bot. I'm not a real human being.",
+        date: new Date(),
+    },
+    {
+        received: true,
+        message: "Haha very funny fix them.. bye.",
+        date: new Date(),
+    },
+]
+
 function ChatView(props) {
 
     const closeChatView = () => {
 
         props.setSelectedContact(-1);
         document.getElementById("chatView").classList.add("hidden");
+
+    }
+
+    const sendMessage = () => {
+
+        if(message.length == 0) return;
+
+        messages.push({
+            received: false,
+            message: message,
+        });
+
+        setMessage("");
 
     }
 
@@ -31,10 +73,21 @@ function ChatView(props) {
 
                 </div>
 
+                <div id="convo">
+                    {messages.map((message, index) => {
+                        return (
+                            <div key={index}  className={message.received ? "message received" : "message sent"}>
+                                {message.message}
+                                <p className="textDate">{message.date.getHours() + ":"+message.date.getMinutes()}</p>
+                            </div>
+                        )
+                    })}
+                </div>
+
                 <div id="chatViewBottomBar">
-                    <input value={message} onChange={(ev) => setMessage(ev.target.value)} type="text" id="messageInput" placeholder="Message" />
+                    <input autoComplete="off" value={message} onChange={(ev) => setMessage(ev.target.value)} type="text" id="messageInput" placeholder="Message" />
                     <div id="chatViewBottomBar-Buttons">
-                        <FontAwesomeIcon onClick={() => setMessage("")} id="sendButton" icon="fa-solid fa-paper-plane" />
+                        <FontAwesomeIcon onClick={sendMessage} id="sendButton" icon="fa-solid fa-paper-plane" />
                     </div>
                 </div>
             </div> }
