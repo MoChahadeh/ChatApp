@@ -182,6 +182,7 @@
     
     cursor: pointer;
     transition: all 0.1s ease-in-out;
+    user-select: none;
 
 }
 #chatView #chatViewBottomBar #chatViewBottomBar-Buttons #sendButton:active {

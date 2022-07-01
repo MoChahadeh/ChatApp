@@ -52,6 +52,7 @@ function ChatView(props) {
         messages.push({
             received: false,
             message: message,
+            date: new Date(),
         });
 
         setMessage("");
@@ -78,7 +79,7 @@ function ChatView(props) {
                         return (
                             <div key={index}  className={message.received ? "message received" : "message sent"}>
                                 {message.message}
-                                <p className="textDate">{message.date.getHours() + ":"+message.date.getMinutes()}</p>
+                                <p className="textDate">{message.date.toLocaleDateString('en-US',{hour: '2-digit', minute: '2-digit'})}</p>
                             </div>
                         )
                     })}
