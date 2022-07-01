@@ -74,7 +74,7 @@ function HomePage(props) {
 
     return (
         <div id="homePage">
-            <NavBar usr={usrObject} setSignedIn={props.setSignedIn}/>
+            <NavBar usr={usrObject} signOut={props.signOut}/>
             <ContactsList selectedContact={selectedContact} setSelectedContact={setSelectedContact} usr={usrObject}/>
             <ChatView usr={usrObject} selectedContact={selectedContact} setSelectedContact={setSelectedContact}/>
         </div>

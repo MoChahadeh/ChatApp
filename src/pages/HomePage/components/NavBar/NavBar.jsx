@@ -20,7 +20,7 @@ function NavBar(props) {
                     <FontAwesomeIcon id="navBar-user-icon" onClick={togglePopUp} icon="fa-solid fa-user-tie" />
                     <div id="user-popup" className="hidden">
                         <div id="user-popup-name">{props.usr.name}</div>
-                        <a onClick={() => props.setSignedIn(false)} id="sign-out-btn">
+                        <a onClick={props.signOut} id="sign-out-btn">
                             Sign Out
                         </a>
                     </div>
