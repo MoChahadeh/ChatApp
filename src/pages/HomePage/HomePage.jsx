@@ -10,73 +10,68 @@ function HomePage(props) {
 
     const [selectedContact, setSelectedContact] = useState(-1);
 
-    const usrObject = {
-        name: "John Doe",
-        email: "example@example.com",
-        admin: false,
-        contactsList: [
-            {
-                name: "Mohamad Chahadeh",
-            },
-            {
-                name: "John Dowe",
-            },
-            {
-                name: "John Appleseed",
-            },
-            {
-                name: "Mohamad Chahadeh",
-            },
-            {
-                name: "John Dowe",
-            },
-            {
-                name: "John Appleseed",
-            },
-            {
-                name: "Mohamad Chahadeh",
-            },
-            {
-                name: "John Dowe",
-            },
-            {
-                name: "John Appleseed",
-            },
-            {
-                name: "Mohamad Chahadeh",
-            },
-            {
-                name: "John Dowe",
-            },
-            {
-                name: "John Appleseed",
-            },
-            {
-                name: "Mohamad Chahadeh",
-            },
-            {
-                name: "John Dowe",
-            },
-            {
-                name: "John Appleseed",
-            },
-            {
-                name: "Mohamad Chahadeh",
-            },
-            {
-                name: "John Dowe",
-            },
-            {
-                name: "John Appleseed",
-            },
-        ],
-    }
+    props.userObject.contactsList = [
+        {
+            name: "Mohamad Chahadeh",
+        },
+        {
+            name: "John Dowe",
+        },
+        {
+            name: "John Appleseed",
+        },
+        {
+            name: "Mohamad Chahadeh",
+        },
+        {
+            name: "John Dowe",
+        },
+        {
+            name: "John Appleseed",
+        },
+        {
+            name: "Mohamad Chahadeh",
+        },
+        {
+            name: "John Dowe",
+        },
+        {
+            name: "John Appleseed",
+        },
+        {
+            name: "Mohamad Chahadeh",
+        },
+        {
+            name: "John Dowe",
+        },
+        {
+            name: "John Appleseed",
+        },
+        {
+            name: "Mohamad Chahadeh",
+        },
+        {
+            name: "John Dowe",
+        },
+        {
+            name: "John Appleseed",
+        },
+        {
+            name: "Mohamad Chahadeh",
+        },
+        {
+            name: "John Dowe",
+        },
+        {
+            name: "John Appleseed",
+        },
+    ];
 
     return (
         <div id="homePage">
-            <NavBar usr={usrObject} signOut={props.signOut}/>
-            <ContactsList selectedContact={selectedContact} setSelectedContact={setSelectedContact} usr={usrObject}/>
-            <ChatView usr={usrObject} selectedContact={selectedContact} setSelectedContact={setSelectedContact}/>
+            <NavBar usr={props.userObject} signOut={props.signOut}/>
+            <ContactsList selectedContact={selectedContact} setSelectedContact={setSelectedContact} usr={props.userObject}/>
+            <ChatView usr={props.userObject} selectedContact={selectedContact} setSelectedContact={setSelectedContact}/>
         </div>
     );
 

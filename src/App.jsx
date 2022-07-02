@@ -4,18 +4,24 @@ import SignInPage from "./pages/SignInPage/SignInPage.jsx";
 import HomePage from "./pages/HomePage/HomePage";
 import { getSuggestedQuery } from "@testing-library/react";
 
+const rootUrl = "http://mocbook-2.local:3011";
+
 function App() {
 
 	const [signedIn, setSignedIn] = useState(false);
 	const [token, setToken] = useState("");
+	const [userObject, setUserObject] = useState({});
 	const [signInServerMessage, setSignInServerMessage] = useState("");
 	const [signUpServerMessage, setSignUpServerMessage] = useState("");
 
 	async function signIn(signUp, obj) {
+
+		if(signedIn) return;
+
 		const route = signUp ? "/users/signup" : "/auth";
 
 		try {
-			const res = await fetch("http://localhost:3011/api" + route, {
+			const res = await fetch(rootUrl+ "/api" + route, {
 				method: "POST",
 				mode: "cors",
 				headers: {
@@ -29,6 +35,26 @@ function App() {
 
 				if (data.token) {
 					console.log(data.token);
+
+					const userObjectResponse = await fetch(rootUrl+"/api/users/me", {
+						method: "GET",
+						mode: "cors",
+						headers: {
+							"Content-Type": "application/json",
+							"x-auth-token": data.token,
+						}
+					})
+
+					if(userObjectResponse.status == 200) {
+
+						const userObjectData = await userObjectResponse.json();
+
+						setUserObject(userObjectData);
+
+					} else {
+						throw new Error("Could not get user info..");
+					}
+
 					setToken(data.token);
 					setSignInServerMessage("");
 					setSignUpServerMessage("");
@@ -59,15 +85,7 @@ function App() {
 
 	return (
 		<div className="App">
-			{signedIn && (
-				<HomePage
-					usrObject={async () => {
-						return await fetchUser();
-					}}
-					signOut={signOut}
-					token={token}
-				/>
-			)}
+			{signedIn && ( <HomePage userObject={userObject} signOut={signOut} token={token} /> )}
 			{!signedIn && <SignInPage signInServerMessage={signInServerMessage} signUpServerMessage={signUpServerMessage} signIn={signIn} />}
 		</div>
 	);
