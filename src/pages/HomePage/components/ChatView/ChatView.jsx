@@ -48,6 +48,8 @@ function ChatView(props) {
     const sendMessage = () => {
 
         if(message.length == 0) return;
+        if(message.length > 500) return alert("Messages should be less than 500 characters..");
+
 
         messages.push({
             received: false,
@@ -55,6 +57,8 @@ function ChatView(props) {
             date: new Date(),
         });
 
+        var objDiv = document.getElementById("chatView");
+        objDiv.scrollTop = objDiv.scrollHeight;
         setMessage("");
 
     }
@@ -85,12 +89,12 @@ function ChatView(props) {
                     })}
                 </div>
 
-                <div id="chatViewBottomBar">
+                <form id="chatViewBottomBar" onSubmit={sendMessage} >
                     <input autoComplete="off" value={message} onChange={(ev) => setMessage(ev.target.value)} type="text" id="messageInput" placeholder="Message" />
-                    <div id="chatViewBottomBar-Buttons">
-                        <FontAwesomeIcon onClick={sendMessage} id="sendButton" icon="fa-solid fa-paper-plane" />
-                    </div>
-                </div>
+                    <a id="chatViewBottomBar-Buttons" onClick={sendMessage}>
+                        <FontAwesomeIcon id="sendButton" icon="fa-solid fa-paper-plane" />
+                    </a>
+                </form>
             </div> }
 
         </div>
