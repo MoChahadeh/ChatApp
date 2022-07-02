@@ -58,6 +58,10 @@
     display: none;
 }
 
+#navBar-right #user-popup #user-popup-name {
+    padding: 5px;
+}
+
 #navBar-right #navBar-user-icon {
 	cursor: pointer;
     transition: 0.1s ease-in-out;
