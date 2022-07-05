@@ -2,7 +2,6 @@ import "./App.css";
 import React, { useState } from "react";
 import SignInPage from "./pages/SignInPage/SignInPage.jsx";
 import HomePage from "./pages/HomePage/HomePage";
-import { getSuggestedQuery } from "@testing-library/react";
 
 const rootUrl = "http://mocbook-2.local:3011";
 
@@ -48,8 +47,13 @@ function App() {
 					if(userObjectResponse.status == 200) {
 
 						const userObjectData = await userObjectResponse.json();
+						
+						const userObj = userObjectData.user;
+						userObj.convos = userObjectData.userConvos;
 
-						setUserObject(userObjectData);
+						console.log(userObj);
+
+						setUserObject(userObj);
 
 					} else {
 						throw new Error("Could not get user info..");
@@ -85,7 +89,7 @@ function App() {
 
 	return (
 		<div className="App">
-			{signedIn && ( <HomePage userObject={userObject} signOut={signOut} token={token} /> )}
+			{signedIn && ( <HomePage usr={userObject} signOut={signOut} token={token} /> )}
 			{!signedIn && <SignInPage signInServerMessage={signInServerMessage} signUpServerMessage={signUpServerMessage} signIn={signIn} />}
 		</div>
 	);

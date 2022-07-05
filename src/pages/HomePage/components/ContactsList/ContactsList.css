@@ -54,7 +54,7 @@
 
 }
 
-#contactsListContainer #list .contact {
+#contactsListContainer .list .contact {
 
     flex: 1;
     height:100px;
@@ -65,12 +65,12 @@
 
 }
 
-#contactsListContainer #list .contact.contactSelected {
+#contactsListContainer .list .contact.contactSelected {
     background-color: rgba(9,121,12,1);
     color: white;
 }
 
-#contactsListContainer #list .contact .innerContainer {
+#contactsListContainer .list .contact .innerContainer {
 
     display: flex;
     flex-direction: row;
@@ -80,7 +80,7 @@
 
 }
 
-#contactsListContainer #list .contact .innerContainer .infoColumn {
+#contactsListContainer .list .contact .innerContainer .infoColumn {
 
     display: flex;
     flex: 1;
@@ -92,7 +92,7 @@
 
 }
 
-#contactsListContainer #list .contact .innerContainer .infoColumn .contactName {
+#contactsListContainer .list .contact .innerContainer .infoColumn .contactName {
 
     font-size: 1.2em;
     font-family: 'Montserrat', sans-serif;
@@ -104,7 +104,7 @@
 }
 
 
-#contactsListContainer #list .contact .innerContainer .contactProfilePic {
+#contactsListContainer .list .contact .innerContainer .contactProfilePic {
 
     height: 100%;
     width: 20%;
@@ -114,7 +114,7 @@
 }
 
 
-#list {
+.list {
     padding-bottom: 100px;
 }
 
