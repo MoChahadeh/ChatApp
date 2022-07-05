@@ -61,7 +61,6 @@ function ChatView(props) {
         });
 
         try {
-
             const res = await fetch("http://mocbook-2.local:3011/api/send", {
                 method: "POST",
                 mode: "cors",
@@ -70,7 +69,7 @@ function ChatView(props) {
                     "x-auth-token": props.token
                 },
                 body: JSON.stringify({
-                    email: props.selectedContact.email,
+                    to: props.selectedContact.users.filter(obj => obj._id != props.usr._id)[0],
                     message
                 })
             })
@@ -79,7 +78,12 @@ function ChatView(props) {
 
                 const data = await res.json();
 
+                console.log(data);
                 props.setSelectedContact(data);
+
+            } else {
+                const err = await res.text();
+                throw new Error(err);
 
             }
 

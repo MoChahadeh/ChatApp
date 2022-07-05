@@ -21,6 +21,15 @@ function ContactsList(props) {
 		document.getElementById("chatView").classList.remove("hidden");
 	}
 
+	const newConvoObj = (contact) => {
+
+		return {
+			users: [props.usr, contact],
+			messages: [],
+		}
+
+	}
+
 
 	async function setSearched(query) {
 
@@ -83,7 +92,7 @@ function ContactsList(props) {
 			{newConvo && <div className="list">
 
 			{searchedUsers.map((contact, index) => (
-					<div key={index} onClick={() => showChatOf(contact)} className={"contact " + (props.selectedContact == index ? "contactSelected " : "")}>
+					<div key={index} onClick={() => showChatOf(newConvoObj(contact))} className={"contact " + (props.selectedContact == index ? "contactSelected " : "")}>
 						<div className="innerContainer">
                             <div className="contactProfilePic" />
                             <div className="infoColumn">
