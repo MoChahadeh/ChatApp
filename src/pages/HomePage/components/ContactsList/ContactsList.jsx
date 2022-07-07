@@ -8,8 +8,6 @@ import {useState} from 'react'
 fontawesome.library.add(faPenSquare);
 fontawesome.library.add(faSquareXmark);
 
-const rootUrl = "http://mocbook-2.local:3011";
-
 function ContactsList(props) {
 
 	const [newConvo, setNewConvo] = useState(false);
@@ -37,7 +35,7 @@ function ContactsList(props) {
 		if(newConvo) {
 
 			try {
-				const res = await fetch(`${rootUrl}/api/users/search?email=${search}`, {
+				const res = await fetch(`${props.rootUrl}/api/users/search?email=${search}`, {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
@@ -90,9 +88,8 @@ function ContactsList(props) {
 			</div>}
 
 			{newConvo && <div className="list">
-
 			{searchedUsers.map((contact, index) => (
-					<div key={index} onClick={() => showChatOf(newConvoObj(contact))} className={"contact " + (props.selectedContact.users.some(obj => obj._id == contact._id) ? "contactSelected " : "")}>
+					<div key={index} onClick={() => showChatOf(newConvoObj(contact))} className={"contact " + (props.selectedContact && props.selectedContact.users.some(obj => obj._id == contact._id) ? "contactSelected " : "")}>
 						<div className="innerContainer">
                             <div className="contactProfilePic" />
                             <div className="infoColumn">

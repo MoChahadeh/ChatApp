@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "./SignInPage.css";
-// import "./styleAnimations.js";
   
 
 function SignInPage(props) {

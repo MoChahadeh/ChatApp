@@ -48,6 +48,8 @@ function ChatView(props) {
 
     }
 
+    console.log(props.selectedContact ? props.selectedContact.messages[0] : null);
+
     async function sendMessage() {
 
         if(message.length == 0) return;
@@ -61,7 +63,7 @@ function ChatView(props) {
         });
 
         try {
-            const res = await fetch("http://mocbook-2.local:3011/api/send", {
+            const res = await fetch(props.rootUrl+"/api/send", {
                 method: "POST",
                 mode: "cors",
                 headers: {
@@ -116,7 +118,7 @@ function ChatView(props) {
                         return (
                             <div key={index}  className={message.sender == props.usr._id ? "message sent" : "message received"}>
                                 {message.message}
-                                <p className="textDate">{new Date(message.date).toLocaleDateString('en-US',{hour: '2-digit', minute: '2-digit'})}</p>
+                                <p className="textDate">{new Date(message.date).toLocaleString('en-US',{hour: '2-digit', minute: '2-digit'})}</p>
                             </div>
                         )
                     })}
