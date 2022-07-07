@@ -43,7 +43,7 @@ function ChatView(props) {
 
     const closeChatView = () => {
 
-        props.setSelectedContact(-1);
+        props.setSelectedContact(null);
         document.getElementById("chatView").classList.add("hidden");
 
     }

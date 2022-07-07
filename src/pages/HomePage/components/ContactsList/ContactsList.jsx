@@ -77,7 +77,7 @@ function ContactsList(props) {
 
 			{!newConvo && <div className="list">
 				{props.usr.convos.map((convo, index) => (
-					<div key={index} onClick={() => showChatOf(convo)} className={"contact " + (props.selectedContact == index ? "contactSelected " : null)}>
+					<div key={index} onClick={() => showChatOf(convo)} className={"contact " + (props.selectedContact && props.selectedContact.users.some(obj1=> obj1._id == convo.users.filter(obj=> obj._id != props.usr._id)[0]._id) ? "contactSelected " : null)}>
 						<div className="innerContainer">
                             <div className="contactProfilePic" />
                             <div className="infoColumn">
@@ -92,7 +92,7 @@ function ContactsList(props) {
 			{newConvo && <div className="list">
 
 			{searchedUsers.map((contact, index) => (
-					<div key={index} onClick={() => showChatOf(newConvoObj(contact))} className={"contact " + (props.selectedContact == index ? "contactSelected " : "")}>
+					<div key={index} onClick={() => showChatOf(newConvoObj(contact))} className={"contact " + (props.selectedContact.users.some(obj => obj._id == contact._id) ? "contactSelected " : "")}>
 						<div className="innerContainer">
                             <div className="contactProfilePic" />
                             <div className="infoColumn">
