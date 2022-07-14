@@ -20,8 +20,8 @@ function HomePage(props) {
     return (
         <div id="homePage">
             <NavBar usr={props.usr} signOut={props.signOut}/>
-            <ContactsList rootUrl={props.rootUrl} selectedContact={selectedContact} token={props.token} setSelectedContact={setSelectedContact} usr={props.usr}/>
-            <ChatView rootUrl={props.rootUrl} token={props.token} usr={props.usr} selectedContact={selectedContact} setSelectedContact={setSelectedContact}/>
+            <ContactsList selectedContact={selectedContact} token={props.token} setSelectedContact={setSelectedContact} usr={props.usr}/>
+            <ChatView token={props.token} usr={props.usr} selectedContact={selectedContact} setSelectedContact={setSelectedContact}/>
         </div>
     );
 

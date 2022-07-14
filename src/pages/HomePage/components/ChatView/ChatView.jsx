@@ -8,34 +8,6 @@ fontawesome.library.add(faXmark);
 fontawesome.library.add(faPaperPlane);
 
 
-const messages = [
-    {
-        received: true,
-        message: "Hi!",
-        date: new Date(),
-    },
-    {
-        received: false,
-        message: "Hey! How Are You?",
-        date: new Date(),
-    },
-    {
-        received: true,
-        message: "I'm Fine thanks for asking, I was checking your work on the project and I have noticed point A and B and C aren't working. Can you please fix them?",
-        date: new Date(),
-    },
-    {
-        received: false,
-        message: "I'm sorry, I'm just a bot. I'm not a real human being.",
-        date: new Date(),
-    },
-    {
-        received: true,
-        message: "Haha very funny fix them.. bye.",
-        date: new Date(),
-    },
-]
-
 function ChatView(props) {
 
     const [message, setMessage] = useState("");
@@ -48,22 +20,14 @@ function ChatView(props) {
 
     }
 
-    console.log(props.selectedContact ? props.selectedContact.messages[0] : null);
-
     async function sendMessage() {
 
         if(message.length == 0) return;
         if(message.length > 500) return alert("Messages should be less than 500 characters..");
 
 
-        messages.push({
-            received: false,
-            message: message,
-            date: new Date(),
-        });
-
         try {
-            const res = await fetch(props.rootUrl+"/api/send", {
+            const res = await fetch(rootUrl+"/api/send", {
                 method: "POST",
                 mode: "cors",
                 headers: {
@@ -80,7 +44,6 @@ function ChatView(props) {
 
                 const data = await res.json();
 
-                console.log(data);
                 props.setSelectedContact(data);
 
             } else {
@@ -118,7 +81,7 @@ function ChatView(props) {
                         return (
                             <div key={index}  className={message.sender == props.usr._id ? "message sent" : "message received"}>
                                 {message.message}
-                                <p className="textDate">{new Date(message.date).toLocaleString('en-US',{hour: '2-digit', minute: '2-digit'})}</p>
+                                <p className="textDate">{new Date(message.date).toLocaleDateString('en-US',{hour: '2-digit', minute: '2-digit'})}</p>
                             </div>
                         )
                     })}

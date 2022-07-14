@@ -31,11 +31,12 @@ function ContactsList(props) {
 
 	async function setSearched(query) {
 
+		setSearch(query);
 
 		if(newConvo) {
 
 			try {
-				const res = await fetch(`${props.rootUrl}/api/users/search?email=${search}`, {
+				const res = await fetch(`${rootUrl}/api/users/search?email=${search}`, {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
@@ -57,8 +58,6 @@ function ContactsList(props) {
 			}
 
 		} 
-
-		setSearch(query);
 
 
 	}

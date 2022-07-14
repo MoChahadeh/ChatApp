@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import SignInPage from "./pages/SignInPage/SignInPage.jsx";
 import HomePage from "./pages/HomePage/HomePage";
 
-const rootUrl = "https://chatappmc.herokuapp.com";
 
 function App() {
 
@@ -102,7 +101,7 @@ function App() {
 
 	return (
 		<div className="App">
-			{signedIn && userObject && ( <HomePage rootUrl={rootUrl} refreshes={refreshes} usr={userObject} signOut={signOut} token={token} /> )}
+			{signedIn && userObject && ( <HomePage refreshes={refreshes} usr={userObject} signOut={signOut} token={token} /> )}
 			{!signedIn && <SignInPage signInServerMessage={signInServerMessage} signUpServerMessage={signUpServerMessage} signIn={signIn} />}
 		</div>
 	);
