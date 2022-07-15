@@ -1,4 +1,6 @@
 function handleForm(event) { event.preventDefault(); } 
 document.addEventListener('submit', handleForm);
 
-const rootUrl = "http://localhost:3011";
+const MODE_DEV = false
+
+const rootUrl = MODE_DEV ? 'http://localhost:3011' : '"https://chatappmc.herokuapp.com"';
