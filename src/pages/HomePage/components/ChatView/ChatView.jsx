@@ -25,6 +25,18 @@ function ChatView(props) {
         if(message.length == 0) return;
         if(message.length > 500) return alert("Messages should be less than 500 characters..");
 
+        props.selectedContact.messages.push({
+            sender: props.usr._id,
+            message: message,
+            sending: true,
+        });
+
+        const msg = message;
+
+        const objDiv = document.getElementById("chatView");
+        objDiv.scrollTop = objDiv.scrollHeight;
+
+        setMessage("");
 
         try {
             const res = await fetch(rootUrl+"/api/send", {
@@ -36,7 +48,7 @@ function ChatView(props) {
                 },
                 body: JSON.stringify({
                     to: props.selectedContact.users.filter(obj => obj._id != props.usr._id)[0],
-                    message
+                    message: msg
                 })
             })
 
@@ -55,10 +67,6 @@ function ChatView(props) {
         } catch(err) {
             console.error(err);
         }
-
-        const objDiv = document.getElementById("chatView");
-        objDiv.scrollTop = objDiv.scrollHeight;
-        setMessage("");
 
     }
 
@@ -81,7 +89,7 @@ function ChatView(props) {
                         return (
                             <div key={index}  className={message.sender == props.usr._id ? "message sent" : "message received"}>
                                 {message.message}
-                                <p className="textDate">{new Date(message.date).toLocaleDateString('en-US',{hour: '2-digit', minute: '2-digit'})}</p>
+                                <p className="textDate">{message.sending? "Sending" : new Date(message.date).toLocaleDateString('en-US',{hour: '2-digit', minute: '2-digit'})}</p>
                             </div>
                         )
                     })}
