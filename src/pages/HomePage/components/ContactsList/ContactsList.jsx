@@ -79,7 +79,7 @@ function ContactsList(props) {
                             <div className="contactProfilePic" />
                             <div className="infoColumn">
                                 <div className="contactName">{convo.users.filter(obj => obj.email != props.usr.email)[0].name}</div>
-                                <div className="contactNumber">+989121234567</div>
+                                <div className="contactNumber">{convo.users.filter(obj => obj.email != props.usr.email)[0].email}</div>
                             </div>
                         </div>
 					</div>
