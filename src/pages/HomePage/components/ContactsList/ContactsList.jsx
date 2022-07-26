@@ -93,7 +93,7 @@ function ContactsList(props) {
                             <div className="contactProfilePic" />
                             <div className="infoColumn">
                                 <div className="contactName">{contact.name}</div>
-                                <div className="contactNumber">+989121234567</div>
+                                <div className="contactNumber">{contact.email}</div>
                             </div>
                         </div>
 					</div>
