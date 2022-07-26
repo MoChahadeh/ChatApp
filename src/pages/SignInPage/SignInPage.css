@@ -172,6 +172,13 @@
 	transition: transform 0.6s ease-in-out;
 }
 
+.disabledSubmitButton {
+    
+    color: white;
+    cursor: not-allowed;
+    filter: opacity(0.75) grayscale(100%);
+}
+
 
 
 @media screen and (orientation: landscape) {

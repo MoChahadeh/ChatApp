@@ -12,12 +12,15 @@ function App() {
 	const [signInServerMessage, setSignInServerMessage] = useState("");
 	const [signUpServerMessage, setSignUpServerMessage] = useState("");
 	const [refreshes, setRefreshes] = useState(0);
+	const [signing, setSigning] = useState(false);
 
 	async function signIn(signUp, obj) {
 
 		if(signedIn) return;
 
 		const route = signUp ? "/users/signup" : "/auth";
+
+		setSigning(true);
 
 		try {
 			const res = await fetch(rootUrl+ "/api" + route, {
@@ -52,8 +55,11 @@ function App() {
 				}
 				throw new Error(err);
 			}
+
+			setSigning(false);
 		} catch (err) {
 			console.error(err);
+			setSigning(false);
 		}
 	}
 
@@ -102,7 +108,7 @@ function App() {
 	return (
 		<div className="App">
 			{signedIn && userObject && ( <HomePage refreshes={refreshes} usr={userObject} signOut={signOut} token={token} /> )}
-			{!signedIn && <SignInPage signInServerMessage={signInServerMessage} signUpServerMessage={signUpServerMessage} signIn={signIn} />}
+			{!signedIn && <SignInPage signing={signing} signInServerMessage={signInServerMessage} signUpServerMessage={signUpServerMessage} signIn={signIn} />}
 		</div>
 	);
 }
