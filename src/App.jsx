@@ -33,6 +33,14 @@ function App() {
 			});
 
 			if (res.status == 200) {
+
+				if(signUp) {
+
+					const text = await res.text();
+					setSignUpServerMessage(text);
+
+				}else {
+
 				const data = await res.json();
 
 				if (data.token) {
@@ -45,6 +53,7 @@ function App() {
 				} else {
 					throw new Error("No token provided");
 				}
+			}
 			} else {
 
 				const err = await res.text();
