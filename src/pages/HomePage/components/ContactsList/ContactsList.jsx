@@ -36,7 +36,7 @@ function ContactsList(props) {
 		if(newConvo) {
 
 			try {
-				const res = await fetch(`${rootUrl}/api/users/search?email=${search}`, {
+				const res = await fetch(`${process.env.REACT_APP_ROOT_URL}/api/users/search?email=${search}`, {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
@@ -79,7 +79,7 @@ function ContactsList(props) {
                             <div className="contactProfilePic" />
                             <div className="infoColumn">
                                 <div className="contactName">{convo.users.filter(obj => obj.email != props.usr.email)[0].name}</div>
-                                <div className="contactNumber">{convo.users.filter(obj => obj.email != props.usr.email)[0].email}</div>
+                                {/* <div className="contactNumber">{convo.users.filter(obj => obj.email != props.usr.email)[0].email}</div> */}
                             </div>
                         </div>
 					</div>
@@ -93,7 +93,7 @@ function ContactsList(props) {
                             <div className="contactProfilePic" />
                             <div className="infoColumn">
                                 <div className="contactName">{contact.name}</div>
-                                <div className="contactNumber">{contact.email}</div>
+                                {/* <div className="contactNumber">{contact.email}</div> */}
                             </div>
                         </div>
 					</div>

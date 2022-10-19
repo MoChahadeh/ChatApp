@@ -39,7 +39,7 @@ function ChatView(props) {
         setMessage("");
 
         try {
-            const res = await fetch(rootUrl+"/api/send", {
+            const res = await fetch(process.env.REACT_APP_ROOT_URL+"/api/send", {
                 method: "POST",
                 mode: "cors",
                 headers: {
