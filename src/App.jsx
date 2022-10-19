@@ -32,6 +32,7 @@ function App() {
 				body: JSON.stringify(obj),
 			});
 
+
 			if (res.status == 200) {
 
 				if(signUp) {
