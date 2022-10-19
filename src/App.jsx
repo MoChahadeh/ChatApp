@@ -23,7 +23,7 @@ function App() {
 		setSigning(true);
 
 		try {
-			const res = await fetch(rootUrl+ "/api" + route, {
+			const res = await fetch(process.env.REACT_APP_ROOT_URL+ "/api" + route, {
 				method: "POST",
 				mode: "cors",
 				headers: {
@@ -33,6 +33,14 @@ function App() {
 			});
 
 			if (res.status == 200) {
+
+				if(signUp) {
+
+					const text = await res.text();
+					setSignUpServerMessage(text);
+
+				}else {
+
 				const data = await res.json();
 
 				if (data.token) {
@@ -45,6 +53,7 @@ function App() {
 				} else {
 					throw new Error("No token provided");
 				}
+			}
 			} else {
 
 				const err = await res.text();
@@ -71,7 +80,7 @@ function App() {
 
 			if(token.length == 0) return;
 
-			const userObjectResponse = await fetch(rootUrl+"/api/users/me", {
+			const userObjectResponse = await fetch(process.env.REACT_APP_ROOT_URL+"/api/users/me", {
 				method: "GET",
 				mode: "cors",
 				headers: {
