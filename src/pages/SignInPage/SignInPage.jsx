@@ -20,7 +20,7 @@ function SignInPage(props) {
                         <input required value={signUpName} onChange={(e) => setSignUpName(e.target.value)} type="text" placeholder="Name"  disabled={props.signing}/>
                         <input required value={signUpEmail} onChange={(e) => setSignUpEmail(e.target.value)}  type="email" placeholder="Email"  disabled={props.signing}/>
                         <input required value={signUpPass} onChange={(e) => setSignUpPass(e.target.value)}   type="password" placeholder="Password"  disabled={props.signing}/>
-                        <button className={props.signing ? "disabledSubmitButton" : ""} disabled={props.signing}>Sign Up</button>
+                        <button className={props.signing ? "disabledSubmitButton" : ""} disabled={props.signing}>{ props.signing ? "Signing Up" : "Sign Up"}</button>
                     </form>
                 </div>
                 <div className="form-container sign-in-container">
@@ -30,7 +30,7 @@ function SignInPage(props) {
                         <input required value={signInEmail} onChange={(e) => setSignInEmail(e.target.value)} type="email" placeholder="Email"  disabled={props.signing}/>
                         <input required value={signInPass} onChange={(e) => setSignInPass(e.target.value)}  type="password" placeholder="Password"  disabled={props.signing}/>
                         <a href="#">Forgot your password?</a>
-                        <button className={props.signing ? "disabledSubmitButton" : ""} disabled={props.signing}>Sign In</button>
+                        <button className={props.signing ? "disabledSubmitButton" : ""} disabled={props.signing}>{props.signing ? "Signing In..." : "Sign In"}</button>
                     </form>
                 </div>
                 <div className="overlay-container">
