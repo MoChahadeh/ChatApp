@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./SignInPage.css";
-  
+import { useLogin } from "../../hooks/useLogin";
+import { useSignup } from "../../hooks/useSignup";
+
 
 function SignInPage(props) {
 
@@ -9,28 +11,48 @@ function SignInPage(props) {
     const [signUpName, setSignUpName] = useState("");
     const [signUpEmail, setSignUpEmail] = useState("");
     const [signUpPass, setSignUpPass] = useState("");
+
+    const {login, signInloading, signInError} = useLogin();
+    const {signUp, signUpLoading, signUpError} = useSignup();
+    const [loading, setLoading] = useState(signInloading || signUpLoading);
+
+    const handleSignIn = async (e) => {
+        e.preventDefault();
+
+        login(signInEmail, signInPass);
+    };
+
+    const handleSignUp = async (e) => {
+        e.preventDefault();
+
+        signUp(signUpEmail, signUpPass);
+    }
+
+    useEffect(() => {
+        setLoading(signInloading || signUpLoading);
+    }, [signInloading, signUpLoading]);
     
     return (
         <div id="signInPage">
             <div className="container" id="container">
                 <div className="form-container sign-up-container">
-                    <form onSubmit={async () => await props.signIn(true, {email: signUpEmail, name:signUpName, password: signUpPass})}>
+                    <form onSubmit={handleSignUp}>
                         <h1>Create Account</h1>
-                        {props.signUpServerMessage && <p className="serverMessage">{props.signUpServerMessage}</p>}
-                        <input required value={signUpName} onChange={(e) => setSignUpName(e.target.value)} type="text" placeholder="Name"  disabled={props.signing}/>
-                        <input required value={signUpEmail} onChange={(e) => setSignUpEmail(e.target.value)}  type="email" placeholder="Email"  disabled={props.signing}/>
-                        <input required value={signUpPass} onChange={(e) => setSignUpPass(e.target.value)}   type="password" placeholder="Password"  disabled={props.signing}/>
-                        <button className={props.signing ? "disabledSubmitButton" : ""} disabled={props.signing}>{ props.signing ? "Signing Up" : "Sign Up"}</button>
+                        {signUpError && <p className="serverMessage">{signUpError}</p>}
+                        <input required value={signUpName} onChange={(e) => setSignUpName(e.target.value)} type="text" placeholder="Name"  disabled={loading}/>
+                        <input required value={signUpEmail} onChange={(e) => setSignUpEmail(e.target.value)}  type="email" placeholder="Email"  disabled={loading}/>
+                        <input required value={signUpPass} onChange={(e) => setSignUpPass(e.target.value)}   type="password" placeholder="Password"  disabled={loading}/>
+                        <button className={loading ? "disabledSubmitButton" : ""} disabled={loading}>{ loading ? "Signing Up" : "Sign Up"}</button>
                     </form>
                 </div>
                 <div className="form-container sign-in-container">
-                    <form  onSubmit={async () => await props.signIn(false, {email: signInEmail, password: signInPass})}>
+                    <form  onSubmit={handleSignIn}>
                         <h1>Sign in</h1>
-                        {props.signInServerMessage && <p className="serverMessage">{props.signInServerMessage}</p>}
-                        <input required value={signInEmail} onChange={(e) => setSignInEmail(e.target.value)} type="email" placeholder="Email"  disabled={props.signing}/>
-                        <input required value={signInPass} onChange={(e) => setSignInPass(e.target.value)}  type="password" placeholder="Password"  disabled={props.signing}/>
+                        {signInError && <p className="serverMessage">{signInError}</p>}
+                        <input required value={signInEmail} onChange={(e) => setSignInEmail(e.target.value)} type="email" placeholder="Email"  disabled={loading}/>
+                        <input required value={signInPass} onChange={(e) => setSignInPass(e.target.value)}  type="password" placeholder="Password"  disabled={loading}/>
                         <a href="#">Forgot your password?</a>
-                        <button className={props.signing ? "disabledSubmitButton" : ""} disabled={props.signing}>{props.signing ? "Signing In..." : "Sign In"}</button>
+                        <button className={loading ? "disabledSubmitButton" : ""} disabled={loading}>{loading ? "Signing In..." : "Sign In"}</button>
                     </form>
                 </div>
                 <div className="overlay-container">
