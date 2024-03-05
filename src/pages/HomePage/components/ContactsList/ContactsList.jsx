@@ -31,9 +31,6 @@ function ContactsList(props) {
 
 	}
 
-	console.log(user);
-
-
 	async function setSearched(query) {
 
 		setSearch(query);

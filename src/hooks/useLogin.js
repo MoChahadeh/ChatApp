@@ -1,6 +1,6 @@
 import { useAuth } from "./useAuth";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export const useLogin = () => {
 
@@ -8,6 +8,7 @@ export const useLogin = () => {
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [unmounted, setUnmounted] = useState(false); // to prevent memory leaks
 
     const login = async (email, password) => {
 
@@ -29,7 +30,6 @@ export const useLogin = () => {
 
             if(!response.ok) throw new Error(await response.text());
 
-
             const data = await response.json();
 
             dispatch({
@@ -44,10 +44,21 @@ export const useLogin = () => {
             setError(error.message);
         }
 
-        setLoading(false);
+        
+        if(!unmounted) {
+            setLoading(false);
+        }
 
     };
 
+
+    useEffect(() => {
+
+        return () => {
+            setUnmounted(true)
+        }
+
+    }, [])
     return { login, loading, error };
 
 }

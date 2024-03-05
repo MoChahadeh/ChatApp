@@ -25,7 +25,7 @@ function SignInPage(props) {
     const handleSignUp = async (e) => {
         e.preventDefault();
 
-        signUp(signUpEmail, signUpPass);
+        signUp(signUpName, signUpEmail, signUpPass);
     }
 
     useEffect(() => {

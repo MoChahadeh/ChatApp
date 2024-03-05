@@ -9,7 +9,7 @@ export const useSignup = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const signup = async (email, password) => {
+    const signup = async (name, email, password) => {
 
         setLoading(true);
         setError(null);
@@ -22,6 +22,7 @@ export const useSignup = () => {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
+                    name,
                     email,
                     password
                 })

@@ -8,6 +8,7 @@ const setAuth = (state, action) => {
         case "LOGIN":
             localStorage.setItem("token", action.payload.token);
             localStorage.setItem("user", JSON.stringify(action.payload.user));
+            localStorage.setItem("loggedIn", true)
             return {
                 loggedIn: true,
                 token: action.payload.token,
@@ -16,6 +17,7 @@ const setAuth = (state, action) => {
         case "LOGOUT":
             localStorage.removeItem("token");
             localStorage.removeItem("user") ;
+            localStorage.removeItem("loggedIn");
             return {
                 loggedIn: false,
                 token: null,
@@ -26,7 +28,7 @@ const setAuth = (state, action) => {
             return {
                 loggedIn: state.loggedIn,
                 token: state.token,
-                user: action.payload.user
+                user: action.payload.user,
             }
         default:
             return state;
@@ -39,7 +41,8 @@ export const AuthProvider = ({ children }) => {
     const [state, dispatch] = useReducer(setAuth, {
         loggedIn: false,
         token: null,
-        user: null
+        user: null,
+        convos: null,
     });
     
     // Runs once at startup to check if there is already a token saved in localStorage
