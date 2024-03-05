@@ -4,6 +4,7 @@ import fontawesome from "@fortawesome/fontawesome";
 import { faPenSquare, faSquareXmark } from "@fortawesome/free-solid-svg-icons";
 
 import {useState} from 'react'
+import { useAuth } from "../../../../hooks/useAuth";
 
 fontawesome.library.add(faPenSquare);
 fontawesome.library.add(faSquareXmark);
@@ -14,6 +15,8 @@ function ContactsList(props) {
 	const [search, setSearch] = useState("");
 	const [searchedUsers, setSearchedUsers] = useState([]);
 
+	const { token, user } = useAuth();
+
 	const showChatOf = (contact) => {
 		props.setSelectedContact(contact);
 		document.getElementById("chatView").classList.remove("hidden");
@@ -22,11 +25,13 @@ function ContactsList(props) {
 	const newConvoObj = (contact) => {
 
 		return {
-			users: [props.usr, contact],
+			users: [user, contact],
 			messages: [],
 		}
 
 	}
+
+	console.log(user);
 
 
 	async function setSearched(query) {
@@ -40,7 +45,7 @@ function ContactsList(props) {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
-						"x-auth-token": props.token,
+						"x-auth-token": token,
 					}
 				})
 
@@ -63,6 +68,7 @@ function ContactsList(props) {
 	}
 
 	return (
+		!user ? <div></div> :
 		<div id="contactsListContainer">
 			<div id="topBar">
 				<input id="searchInput" value={search} onChange={async (e) => await setSearched(e.target.value)} type="text" placeholder={newConvo ? "Start new conversation with.." : "Search conversations"} />
@@ -73,13 +79,13 @@ function ContactsList(props) {
 			</div>
 
 			{!newConvo && <div className="list">
-				{props.usr.convos.map((convo, index) => (
-					<div key={index} onClick={() => showChatOf(convo)} className={"contact " + (props.selectedContact && props.selectedContact.users.some(obj1=> obj1._id == convo.users.filter(obj=> obj._id != props.usr._id)[0]._id) ? "contactSelected " : null)}>
+				{user.convos.map((convo, index) => (
+					<div key={index} onClick={() => showChatOf(convo)} className={"contact " + (props.selectedContact && props.selectedContact.users.some(obj1=> obj1._id == convo.users.filter(obj=> obj._id != user._id)[0]._id) ? "contactSelected " : null)}>
 						<div className="innerContainer">
                             <div className="contactProfilePic" />
                             <div className="infoColumn">
-                                <div className="contactName">{convo.users.filter(obj => obj.email != props.usr.email)[0].name}</div>
-                                {/* <div className="contactNumber">{convo.users.filter(obj => obj.email != props.usr.email)[0].email}</div> */}
+                                <div className="contactName">{convo.users.filter(obj => obj.email != user.email)[0].name}</div>
+                                {/* <div className="contactNumber">{convo.users.filter(obj => obj.email != user.email)[0].email}</div> */}
                             </div>
                         </div>
 					</div>
