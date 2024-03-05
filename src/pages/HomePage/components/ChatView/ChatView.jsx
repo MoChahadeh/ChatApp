@@ -3,6 +3,7 @@ import fontawesome from "@fortawesome/fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import { useAuth } from "../../../../hooks/useAuth";
 
 fontawesome.library.add(faXmark);
 fontawesome.library.add(faPaperPlane);
@@ -11,6 +12,7 @@ fontawesome.library.add(faPaperPlane);
 function ChatView(props) {
 
     const [message, setMessage] = useState("");
+    const { user, token } = useAuth();
 
 
     const closeChatView = () => {
@@ -26,7 +28,7 @@ function ChatView(props) {
         if(message.length > 500) return alert("Messages should be less than 500 characters..");
 
         props.selectedContact.messages.push({
-            sender: props.usr._id,
+            sender: user._id,
             message: message,
             sending: true,
         });
@@ -36,18 +38,16 @@ function ChatView(props) {
         const objDiv = document.getElementById("chatView");
         objDiv.scrollTop = objDiv.scrollHeight;
 
-        setMessage("");
-
         try {
             const res = await fetch(process.env.REACT_APP_ROOT_URL+"/api/send", {
                 method: "POST",
                 mode: "cors",
                 headers: {
                     "Content-Type": "application/json",
-                    "x-auth-token": props.token
+                    "x-auth-token": token
                 },
                 body: JSON.stringify({
-                    to: props.selectedContact.users.filter(obj => obj._id != props.usr._id)[0],
+                    to: props.selectedContact.users.filter(obj => obj._id != user._id)[0],
                     message: msg
                 })
             })
@@ -68,6 +68,8 @@ function ChatView(props) {
             console.error(err);
         }
 
+        setMessage("");
+
     }
 
 
@@ -76,7 +78,7 @@ function ChatView(props) {
 
             {props.selectedContact && <div id="chatViewContent">
                 <div id="chatViewTopBar">
-                    <h3>{props.selectedContact.users.filter(obj => obj.email != props.usr.email)[0].name}</h3>
+                    <h3>{props.selectedContact.users.filter(obj => obj.email != user.email)[0].name}</h3>
 
                     <div onClick={closeChatView} id="chatViewTopBar-Right">
                         <FontAwesomeIcon id="chatViewTopBar-Right-X" icon="fa-solid fa-xmark" onClick={props.closeChatView} />
@@ -87,7 +89,7 @@ function ChatView(props) {
                 <div id="convo">
                     {props.selectedContact.messages.map((message, index) => {
                         return (
-                            <div key={index}  className={message.sender == props.usr._id ? "message sent" : "message received"}>
+                            <div key={index}  className={message.sender == user._id ? "message sent" : "message received"}>
                                 {message.message}
                                 <p className="textDate">{message.sending? "Sending" : new Date(message.date).toLocaleDateString('en-US',{hour: '2-digit', minute: '2-digit'})}</p>
                             </div>

@@ -12,8 +12,8 @@ function SignInPage(props) {
     const [signUpEmail, setSignUpEmail] = useState("");
     const [signUpPass, setSignUpPass] = useState("");
 
-    const {login, signInloading, signInError} = useLogin();
-    const {signUp, signUpLoading, signUpError} = useSignup();
+    const {login, loading :signInloading, error: signInError} = useLogin();
+    const {signUp, loading :signUpLoading, error: signUpError} = useSignup();
     const [loading, setLoading] = useState(signInloading || signUpLoading);
 
     const handleSignIn = async (e) => {
