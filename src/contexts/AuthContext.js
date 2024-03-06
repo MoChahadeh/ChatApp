@@ -23,12 +23,11 @@ const setAuth = (state, action) => {
                 token: null,
                 user: null
             }
-        case "UPDATEUSER":
-            localStorage.setItem("user", JSON.stringify(action.payload.user));
+        case "UPDATE_USER":
+            localStorage.setItem("user", JSON.stringify(action.payload));
             return {
-                loggedIn: state.loggedIn,
-                token: state.token,
-                user: action.payload.user,
+                ...state,
+                user: action.payload
             }
         default:
             return state;
@@ -42,7 +41,6 @@ export const AuthProvider = ({ children }) => {
         loggedIn: false,
         token: null,
         user: null,
-        convos: null,
     });
     
     // Runs once at startup to check if there is already a token saved in localStorage

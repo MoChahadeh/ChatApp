@@ -28,7 +28,19 @@ export const useLogin = () => {
                 })
             });
 
-            if(!response.ok) throw new Error(await response.text());
+            if(!response.ok) {
+
+                if(response.statusCode == 409){
+
+                    dispatch({
+                        type: "LOGOUT"
+                    });
+
+                    throw new Error("Login Expired. Please login again.");
+                }
+
+                throw new Error(await response.text());
+            }
 
             const data = await response.json();
 
@@ -45,20 +57,10 @@ export const useLogin = () => {
         }
 
         
-        if(!unmounted) {
-            setLoading(false);
-        }
+        setLoading(false);
 
     };
 
-
-    useEffect(() => {
-
-        return () => {
-            setUnmounted(true)
-        }
-
-    }, [])
     return { login, loading, error };
 
 }

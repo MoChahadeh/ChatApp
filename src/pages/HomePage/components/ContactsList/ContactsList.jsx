@@ -33,7 +33,6 @@ function ContactsList(props) {
 
 	async function setSearched(query) {
 
-		setSearch(query);
 
 		if(newConvo) {
 
@@ -60,6 +59,8 @@ function ContactsList(props) {
 			}
 
 		} 
+
+		setSearch(query);
 
 
 	}
