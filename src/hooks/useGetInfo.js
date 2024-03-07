@@ -38,14 +38,14 @@ export const useGetInfo = () => {
                 payload: data
             });
 
+            setLoading(false);
             return Promise.resolve(data);
         } catch (err) {
             console.error(err);
             setError(err.message);
+            setLoading(false);
             return Promise.reject(err);
         }
-
-        setLoading(false);
 
     }
 
