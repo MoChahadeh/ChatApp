@@ -19,7 +19,7 @@ function HomePage() {
             try {
                 const newInfo = await getInfo();
 
-                if(selectedContact) {
+                if(selectedContact && selectedContact._id) {
 
                     const newConvo = newInfo.convos.find(convo => (convo._id == selectedContact._id || convo.users.all(user => selectedContact.users.includes(user))));
 
