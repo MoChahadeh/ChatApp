@@ -3,9 +3,15 @@ import fontawesome from '@fortawesome/fontawesome'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faUserTie } from '@fortawesome/fontawesome-free-solid'
 
+import { useAuth } from "../../../../hooks/useAuth";
+import { useLogout } from "../../../../hooks/useLogout";
+
 fontawesome.library.add(faUserTie);
 
-function NavBar(props) {
+function NavBar() {
+
+    const {user} = useAuth();
+    const {logout} = useLogout();
 
     return (
         <div id="navBar">
@@ -19,8 +25,8 @@ function NavBar(props) {
                 <div id="navBar-right-user-icon">
                     <FontAwesomeIcon id="navBar-user-icon" onClick={togglePopUp} icon="fa-solid fa-user-tie" />
                     <div id="user-popup" className="hidden">
-                        <div id="user-popup-name">{props.usr.name}</div>
-                        <a onClick={props.signOut} id="sign-out-btn">
+                        <div id="user-popup-name">{user.name}</div>
+                        <a onClick={logout} id="sign-out-btn">
                             Sign Out
                         </a>
                     </div>
