@@ -16,7 +16,16 @@ function HomePage() {
 
         setTimeout(async () => {
 
-            getInfo();
+            try {
+                const newInfo = await getInfo();
+
+                const newConvo = newInfo.convos.find(convo => (convo._id == selectedContact._id || convo.users.all(user => selectedContact.users.includes(user))));
+
+                if (newConvo.messages.length != selectedContact.messages.length) setSelectedContact(newConvo);
+
+            } catch (err) {
+                console.error(err);
+            }
 
             setUpdate(!update);
         

@@ -38,10 +38,11 @@ export const useGetInfo = () => {
                 payload: data
             });
 
-
+            return Promise.resolve(data);
         } catch (err) {
             console.error(err);
             setError(err.message);
+            return Promise.reject(err);
         }
 
         setLoading(false);
