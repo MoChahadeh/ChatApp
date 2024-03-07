@@ -21,7 +21,7 @@ function HomePage() {
 
                 if(selectedContact && selectedContact._id) {
 
-                    const newConvo = newInfo.convos.find(convo => (convo._id == selectedContact._id || convo.users.all(user => selectedContact.users.includes(user))));
+                    const newConvo = newInfo.convos.find(convo => convo && (convo._id == selectedContact._id || convo.users.every(user => selectedContact.users.includes(user))));
 
                     if (newConvo.messages.length != selectedContact.messages.length) setSelectedContact(newConvo);
     
