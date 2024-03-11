@@ -1,4 +1,5 @@
 import { createContext, useReducer, useEffect } from "react";
+import { io } from "socket.io-client";
 
 export const AuthContext = createContext();
 
@@ -9,19 +10,39 @@ const setAuth = (state, action) => {
             localStorage.setItem("token", action.payload.token);
             localStorage.setItem("user", JSON.stringify(action.payload.user));
             localStorage.setItem("loggedIn", true)
+
+            if(!state.socket) {
+                const socket = io(process.env.REACT_APP_ROOT_URL, {
+                    auth: {
+                        token: action.payload.token
+                    }
+                }, () => {
+                    console.log("Connected to socket");
+                });
+                return {
+                    loggedIn: true,
+                    token: action.payload.token,
+                    user: action.payload.user,
+                    socket
+                }
+            }
+
             return {
+                ...state,
                 loggedIn: true,
                 token: action.payload.token,
-                user: action.payload.user
+                user: action.payload.user,
             }
         case "LOGOUT":
             localStorage.removeItem("token");
             localStorage.removeItem("user") ;
             localStorage.removeItem("loggedIn");
+            state.socket.disconnect();
             return {
                 loggedIn: false,
                 token: null,
-                user: null
+                user: null,
+                socket: null
             }
         case "UPDATE_USER":
             localStorage.setItem("user", JSON.stringify(action.payload));
@@ -41,13 +62,13 @@ export const AuthProvider = ({ children }) => {
         loggedIn: false,
         token: null,
         user: null,
+        socket: null,
     });
     
     // Runs once at startup to check if there is already a token saved in localStorage
     useEffect(() => {
 
         const token = localStorage.getItem("token");
-
         if (token) {
             const user = JSON.parse(localStorage.getItem("user"));
             if(!user) return;
