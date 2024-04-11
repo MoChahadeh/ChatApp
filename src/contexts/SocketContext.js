@@ -1,12 +1,13 @@
 import {createContext, useState, useEffect} from 'react';
 import io from 'socket.io-client';
 import { useAuth } from '../hooks/useAuth';
+import useSound from 'use-sound';
 
 export const SocketContext = createContext();
 
 let connectedToSocket = false;
 
-const initSocket = (token, dispatch, getInfo) => {
+const initSocket = (token, dispatch, playSound) => {
 
     const socket = io(process.env.REACT_APP_ROOT_URL, {
         auth: {
@@ -33,6 +34,10 @@ const initSocket = (token, dispatch, getInfo) => {
     socket.on("newMessage", (convo) => {
 
         dispatch({type: "NEW_MESSAGE", payload: {convo}});
+        const objDiv = document.getElementById("chatView");
+        if(objDiv) objDiv.scrollTop = objDiv.scrollHeight;
+        // console.log("New message received")
+        playSound();
 
     })
 
@@ -44,6 +49,7 @@ export const SocketProvider = ({children}) => {
 
     const [socket, setSocket] = useState(null);
     const {token, loggedIn, user, dispatch} = useAuth();
+    const [playSound,] = useSound(process.env.PUBLIC_URL+ "new_message_sound.mp3");
 
 
     const disconnectSocket = () => {
@@ -55,8 +61,6 @@ export const SocketProvider = ({children}) => {
     
     }
 
-    console.log("This 0");
-
     useEffect(() => {
 
         if(!(token && loggedIn && user)) return;
@@ -65,7 +69,7 @@ export const SocketProvider = ({children}) => {
 
         if(connectedToSocket) return;
 
-        const newSocket = initSocket(token, dispatch);
+        const newSocket = initSocket(token, dispatch, playSound);
 
         if(!newSocket) {
 
