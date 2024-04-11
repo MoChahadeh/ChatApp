@@ -6,7 +6,7 @@ export const SocketContext = createContext();
 
 let connectedToSocket = false;
 
-const initSocket = (token, dispatch) => {
+const initSocket = (token, dispatch, getInfo) => {
 
     const socket = io(process.env.REACT_APP_ROOT_URL, {
         auth: {
@@ -43,18 +43,27 @@ export const SocketProvider = ({children}) => {
 
 
     const [socket, setSocket] = useState(null);
-    const {token, dispatch} = useAuth();
+    const {token, loggedIn, user, dispatch} = useAuth();
+
+
+    const disconnectSocket = () => {
+
+        if(socket) socket.disconnect();
+
+        // connectedToSocket = false;
+        setSocket(null);
+    
+    }
+
+    console.log("This 0");
 
     useEffect(() => {
 
-        const unmountFunc = () => {
-            if(socket) socket.disconnect();
-        };
+        if(!(token && loggedIn && user)) return;
 
-        if(!token) return unmountFunc;
+        console.log("This 1");
 
-
-        if(connectedToSocket) return unmountFunc;
+        if(connectedToSocket) return;
 
         const newSocket = initSocket(token, dispatch);
 
@@ -62,19 +71,20 @@ export const SocketProvider = ({children}) => {
 
             dispatch({type: "LOGOUT"});
 
-            throw new Error("Failed to initialize socket")
+            return;
         };
 
         connectedToSocket = true;
 
+        dispatch({type: "SOCKET_CONNECTION", payload: {socket: newSocket}});
         setSocket(newSocket);
 
-        return unmountFunc;
+        return disconnectSocket;
 
     }, [token]);
 
     return (
-        <SocketContext.Provider value={{socket}}>
+        <SocketContext.Provider value={{socket, disconnectSocket}}>
             {children}
         </SocketContext.Provider>
     );

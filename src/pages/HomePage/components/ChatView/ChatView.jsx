@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { useAuth } from "../../../../hooks/useAuth";
+import { useGetInfo } from "../../../../hooks/useGetInfo";
 
 fontawesome.library.add(faXmark);
 fontawesome.library.add(faPaperPlane);
@@ -13,6 +14,7 @@ function ChatView(props) {
 
     const [message, setMessage] = useState("");
     const { user, token } = useAuth();
+    const {getInfo} = useGetInfo();
 
 
     const closeChatView = () => {
@@ -57,6 +59,8 @@ function ChatView(props) {
                 const data = await res.json();
 
                 props.setSelectedContact(data);
+
+                await getInfo();
 
             } else {
                 const err = await res.text();

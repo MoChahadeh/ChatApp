@@ -18,14 +18,22 @@ const setAuth = (state, action) => {
                 token: action.payload.token,
                 user: action.payload.user,
             }
+        case "SOCKET_CONNECTION":
+            return {
+                ...state,
+                socket: action.payload.socket
+            }
+        
         case "LOGOUT":
             localStorage.removeItem("token");
             localStorage.removeItem("user") ;
             localStorage.removeItem("loggedIn");
+            if(state.socket) state.socket.disconnect();
             return {
                 loggedIn: false,
                 token: null,
-                user: null            
+                user: null,
+                socket: null    
             }
         case "UPDATE_USER":
             localStorage.setItem("user", JSON.stringify(action.payload));
