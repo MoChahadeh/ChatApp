@@ -16,7 +16,7 @@ export const useSignup = () => {
 
         try {
 
-            const response = await fetch(process.env.REACT_APP_ROOT_URL+"/api/user/signup", {
+            const response = await fetch(process.env.REACT_APP_ROOT_URL+"/api/users/signup", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

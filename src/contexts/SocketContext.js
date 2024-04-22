@@ -19,17 +19,17 @@ const initSocket = (token, dispatch, playSound) => {
         withCredentials: true
     });
 
-    socket.on("connect_error", () => {
-        dispatch({type: "LOGOUT"});
-    });
+    // socket.on("connect_error", () => {
+    //     dispatch({type: "LOGOUT"});
+    // });
 
     socket.on("connect", () => {
         console.log("Connected to socket");
     })
 
-    socket.on("disconnect", () => {
-        dispatch({type: "LOGOUT"});
-    });
+    // socket.on("disconnect", () => {
+    //     dispatch({type: "LOGOUT"});
+    // });
 
     socket.on("newMessage", (convo) => {
 
@@ -38,6 +38,12 @@ const initSocket = (token, dispatch, playSound) => {
         if(objDiv) objDiv.scrollTop = objDiv.scrollHeight;
         // console.log("New message received")
         playSound();
+
+    })
+
+    socket.on("message_read", ({convo_id, message_id}) => {
+
+        dispatch({type: "MESSAGE_READ", payload: {convo_id, message_id}});
 
     })
 

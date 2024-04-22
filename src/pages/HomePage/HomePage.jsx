@@ -14,7 +14,6 @@ function HomePage() {
     useEffect(() => {
         if(!selectedContact) return;
         const newConvo = user.convos.find(convo => convo._id == selectedContact._id);
-
         if(newConvo) setSelectedContact(newConvo);
 
     }, [user])
