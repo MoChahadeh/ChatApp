@@ -17,8 +17,8 @@ function ContactsList(props) {
 
 	const { token, user } = useAuth();
 
-	const showChatOf = (contact) => {
-		props.setSelectedContact(contact);
+	const showChatOf = (convo) => {
+		props.setSelectedContact(convo);
 		document.getElementById("chatView").classList.remove("hidden");
 	}
 

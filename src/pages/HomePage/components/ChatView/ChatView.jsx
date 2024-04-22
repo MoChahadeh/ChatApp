@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { useAuth } from "../../../../hooks/useAuth";
+import { useGetInfo } from "../../../../hooks/useGetInfo";
+import { Message } from "./Components/Message/Message.jsx";
 
 fontawesome.library.add(faXmark);
 fontawesome.library.add(faPaperPlane);
@@ -13,6 +15,7 @@ function ChatView(props) {
 
     const [message, setMessage] = useState("");
     const { user, token } = useAuth();
+    const {getInfo} = useGetInfo();
 
 
     const closeChatView = () => {
@@ -58,6 +61,8 @@ function ChatView(props) {
 
                 props.setSelectedContact(data);
 
+                await getInfo();
+
             } else {
                 const err = await res.text();
                 throw new Error(err);
@@ -87,14 +92,7 @@ function ChatView(props) {
                 </div>
 
                 <div id="convo">
-                    {props.selectedContact.messages.map((message, index) => {
-                        return (
-                            <div key={index}  className={message.sender == user._id ? "message sent" : "message received"}>
-                                {message.message}
-                                <p className="textDate">{message.sending? "Sending" : new Date(message.date).toLocaleDateString('en-US',{hour: '2-digit', minute: '2-digit'})}</p>
-                            </div>
-                        )
-                    })}
+                    {props.selectedContact.messages.map((message, index) => <Message convo={props.selectedContact} key={message._id} message={message} user={user}/>)}
                 </div>
 
                 <form id="chatViewBottomBar" onSubmit={sendMessage} >

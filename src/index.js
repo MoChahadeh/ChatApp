@@ -13,3 +13,6 @@ root.render(
     </AuthProvider>
   </React.StrictMode>
 );
+
+// report web vitals
+reportWebVitals();

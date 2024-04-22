@@ -13,7 +13,7 @@ function SignInPage(props) {
     const [signUpPass, setSignUpPass] = useState("");
 
     const {login, loading :signInloading, error: signInError} = useLogin();
-    const {signUp, loading :signUpLoading, error: signUpError} = useSignup();
+    const {signup, loading :signUpLoading, error: signUpError} = useSignup();
     const [loading, setLoading] = useState(signInloading || signUpLoading);
 
     const handleSignIn = async (e) => {
@@ -25,7 +25,7 @@ function SignInPage(props) {
     const handleSignUp = async (e) => {
         e.preventDefault();
 
-        signUp(signUpName, signUpEmail, signUpPass);
+        signup(signUpName, signUpEmail, signUpPass);
     }
 
     useEffect(() => {

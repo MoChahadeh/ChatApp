@@ -3,46 +3,28 @@ import NavBar from "./components/NavBar/NavBar.jsx";
 import ContactsList from "./components/ContactsList/ContactsList.jsx";
 import ChatView from "./components/ChatView/ChatView";
 import { useState, useEffect } from "react";
-import { useGetInfo } from "../../hooks/useGetInfo.js";
+import { SocketProvider } from "../../contexts/SocketContext.js";
+import { useAuth } from "../../hooks/useAuth.js";
 
 function HomePage() {
 
     const [selectedContact, setSelectedContact] = useState(null);
-    const {getInfo} = useGetInfo();
-
-    const [update, setUpdate] = useState(false);
+    const {user} = useAuth();
 
     useEffect(() => {
+        if(!selectedContact) return;
+        const newConvo = user.convos.find(convo => convo._id == selectedContact._id);
+        if(newConvo) setSelectedContact(newConvo);
 
-        setTimeout(async () => {
-
-            try {
-                const newInfo = await getInfo();
-
-                if(selectedContact && selectedContact._id) {
-
-                    const newConvo = newInfo.convos.find(convo => convo && (convo._id == selectedContact._id || convo.users.every(user => selectedContact.users.includes(user))));
-
-                    if (newConvo.messages.length != selectedContact.messages.length) setSelectedContact(newConvo);
-    
-
-                }
-
-            } catch (err) {
-                console.error(err);
-            }
-
-            setUpdate(!update);
-        
-        }, 500)
-
-    }, [update])
+    }, [user])
 
     return (
         <div id="homePage">
             <NavBar />
-            <ContactsList selectedContact={selectedContact} setSelectedContact={setSelectedContact} />
-            <ChatView selectedContact={selectedContact} setSelectedContact={setSelectedContact} />
+            <SocketProvider>
+                <ContactsList selectedContact={selectedContact} setSelectedContact={setSelectedContact} />
+                <ChatView selectedContact={selectedContact} setSelectedContact={setSelectedContact} />
+            </SocketProvider>
         </div>
     );
 

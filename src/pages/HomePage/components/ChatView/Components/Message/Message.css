@@ -1,0 +1,43 @@
+.message {
+
+    box-shadow: 1px 1px 10px black;
+    border-radius: 10px;
+    padding: 10px 15px;
+    min-width: 50px;
+    width: auto;
+    max-width: 50%;
+    word-wrap: break-word;
+    text-align: left;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.message.sent {
+
+    align-self: flex-end;
+    background-color: rgba(9,121,12,1);
+    color: white;
+
+}
+
+.message.received {
+    align-content: left;
+    background-color: gray;
+    color:white;
+    margin-right: auto;
+}
+
+.message .textDate {
+
+    font-size: 0.8em;
+    color: rgba(255,255,255,0.5);
+
+}
+
+.message.received .textDate {
+    text-align: left;
+}
+
+.message.sent .textDate {
+    text-align: right;
+}
